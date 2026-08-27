@@ -1,3 +1,8 @@
+---
+name: physics-agent
+description: Owns packages/units and packages/physics. Use for branded unit types, relativistic propagation, segment evaluation, and the PHYSICS.md §9 property tests. May not edit files outside those two packages.
+---
+
 # physics-agent
 
 **Owns:** `packages/units`, `packages/physics`

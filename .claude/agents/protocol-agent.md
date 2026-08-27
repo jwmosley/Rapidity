@@ -1,3 +1,8 @@
+---
+name: protocol-agent
+description: Owns packages/protocol and schemas/. Use for changes to Telemetry, Command, TelemetryFrame, the module manifest schema, or the Tier 1 schema lint contract. May not edit files outside those paths.
+---
+
 # protocol-agent
 
 **Owns:** `packages/protocol`, `schemas/`

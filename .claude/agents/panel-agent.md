@@ -1,3 +1,8 @@
+---
+name: panel-agent
+description: Owns packages/panel. Use for SVG instruments, ARIA semantics, keyboard interaction, and layout. Binds to @rapidity/protocol only, never @rapidity/sim. May not edit files outside packages/panel.
+---
+
 # panel-agent
 
 **Owns:** `packages/panel`

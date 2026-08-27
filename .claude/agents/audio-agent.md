@@ -1,3 +1,8 @@
+---
+name: audio-agent
+description: Owns packages/audio. Use for sonification and alert earcons via Web Audio. Binds to @rapidity/protocol only, never @rapidity/sim. May not edit files outside packages/audio.
+---
+
 # audio-agent
 
 **Owns:** `packages/audio`

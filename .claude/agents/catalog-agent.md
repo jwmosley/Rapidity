@@ -1,3 +1,8 @@
+---
+name: catalog-agent
+description: Owns packages/catalog and tools/catalog-etl. Use for the star catalog artifact, its Python ETL, and typed read access to the committed data. May not edit files outside those paths.
+---
+
 # catalog-agent
 
 **Owns:** `packages/catalog`, `tools/catalog-etl`

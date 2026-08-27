@@ -1,3 +1,8 @@
+---
+name: sim-agent
+description: Owns packages/sim. Use for the command log, segment-boundary checkpoints, SimHost implementations, and the event-driven clock. May not edit files outside packages/sim.
+---
+
 # sim-agent
 
 **Owns:** `packages/sim`

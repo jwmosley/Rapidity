@@ -1,3 +1,8 @@
+---
+name: a11y-auditor
+description: Independent accessibility verification against ACCESSIBILITY.md. Writes tests (*.a11y.test.ts and the guidepup suite) across all packages and reports findings. Never edits implementation code.
+---
+
 # a11y-auditor
 
 **Owns:** test files only, across all packages
