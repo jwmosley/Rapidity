@@ -26,6 +26,10 @@ Three enforcement tiers:
 | 3 | Guidepup screen-reader automation | Nightly, non-blocking |
 | 4 | Manual four-reader matrix | Release gate, checklist |
 
+**Language.** The gates and acceptance tests bind in English. Japanese materials
+ship alongside from Phase 2 — available and tracked, non-blocking, localized
+through the string catalogs. See issue #1.
+
 ### Tier 1 — schema lint
 
 Every telemetry definition must carry `label`, `shortLabel`, and `spoken`. Every alert

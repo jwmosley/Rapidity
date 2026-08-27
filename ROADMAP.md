@@ -54,7 +54,9 @@ Design it at phone width first, then widen.
 
 **Acceptance:** the gauge passes all four readers. Schema lint, axe-core, and 320 px
 reflow all gating in CI. Touch is a first-class input source. No hover-only
-affordances anywhere.
+affordances anywhere. English is the binding acceptance language; a Japanese catalog
+and Japanese reader tests ship alongside — available and tracked, non-blocking
+(issue #1).
 
 ---
 
