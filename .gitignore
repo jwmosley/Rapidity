@@ -27,6 +27,9 @@ Thumbs.db
 !.vscode/extensions.json
 !.vscode/settings.json
 
+# phase 0 spike code — throwaway by decree (ROADMAP.md); findings live in docs/spikes/
+/spikes/
+
 # local env
 .env
 .env.local
