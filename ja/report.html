@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>報告フォーム — Rapidity スクリーンリーダーテスト</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 1.5rem; max-width: 40rem; line-height: 1.7; }
+      label { display: block; font-weight: 600; margin-top: 1.2rem; }
+      input[type='text'], textarea { display: block; width: 100%; font: inherit; padding: 0.5rem; margin-top: 0.3rem; box-sizing: border-box; }
+      textarea { min-height: 4.5rem; }
+      button { min-height: 48px; font-size: 1rem; padding: 0.6rem 1rem; margin-top: 1.5rem; }
+      #out { margin-top: 1rem; min-height: 12rem; font-family: ui-monospace, monospace; }
+      #save-note { border: 1px solid #999; padding: 0.5rem; margin-top: 1rem; }
+    </style>
+  </head>
+  <body>
+    <h1>報告フォーム</h1>
+    <p><a href="index.html">はじめに</a> · <a href="test-1-gauge.html">テスト1</a></p>
+
+    <p>入力はこのブラウザに自動保存されます。「報告を作成」で全体がテキストに
+      まとまるので、コピーして Jeremy に送ってください。</p>
+
+    <form id="report">
+      <h2>お使いの環境</h2>
+      <label for="env-sr">スクリーンリーダーとバージョン(PC-Talker、NVDA日本語版、VoiceOver など)</label>
+      <input type="text" id="env-sr" />
+      <label for="env-browser">ブラウザとバージョン</label>
+      <input type="text" id="env-browser" />
+      <label for="env-os">OSとバージョン</label>
+      <input type="text" id="env-os" />
+
+      <h2>テスト1 — リアルタイム計器</h2>
+      <label for="q1-1">1.1 — 計器の読み上げは、できるだけそのままで何と言いましたか。</label>
+      <textarea id="q1-1"></textarea>
+      <label for="q1-2">1.2 — 変動中に戻ったとき:毎回最新の値でしたか、古い値でしたか。</label>
+      <textarea id="q1-2"></textarea>
+      <label for="q1-3">1.3 — 「毎回」:追いつく、遅れる、あふれる?実物の計器盤で耐えられますか。</label>
+      <textarea id="q1-3"></textarea>
+      <label for="q1-4">1.4 — 「警告のみ」:30を跨いだとき、両方向とも確実に読み上げられましたか。</label>
+      <textarea id="q1-4"></textarea>
+      <label for="q1-5">1.5 — 「静音」:想定どおり無音でしたか。</label>
+      <textarea id="q1-5"></textarea>
+      <label for="q1-6">1.6 — 「計器は黙り、警告だけが話し、値は自分から照会する」— 正しい方針だと思いますか。</label>
+      <textarea id="q1-6"></textarea>
+
+      <h2>そのほか</h2>
+      <label for="q-open">こちらから聞いていないことも何でも — 気になった点、驚いた点、提案。訳文の不自然さの指摘も歓迎します。</label>
+      <textarea id="q-open"></textarea>
+
+      <button type="button" id="build">報告を作成</button>
+    </form>
+
+    <div aria-live="polite" id="save-note"></div>
+
+    <label for="out">報告(テキスト)</label>
+    <textarea id="out" readonly></textarea>
+
+    <script>
+      const KEY = 'rapidity-ja-report';
+      const form = document.getElementById('report');
+      const note = document.getElementById('save-note');
+      const out = document.getElementById('out');
+      const fields = [...form.querySelectorAll('input[type="text"], textarea')];
+
+      function load() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+          for (const f of fields) if (saved[f.id]) f.value = saved[f.id];
+        } catch (e) { /* 保存データがなくても問題ない */ }
+      }
+
+      let saveTimer = null;
+      function save() {
+        clearTimeout(saveTimer);
+        saveTimer = setTimeout(() => {
+          try {
+            const data = {};
+            for (const f of fields) data[f.id] = f.value;
+            localStorage.setItem(KEY, JSON.stringify(data));
+          } catch (e) { /* プライベートモード等。コピーは使える */ }
+        }, 500);
+      }
+      form.addEventListener('input', save);
+
+      document.getElementById('build').addEventListener('click', async () => {
+        const v = (id) => (document.getElementById(id).value.trim() || '(無回答)');
+        const lines = [
+          'RAPIDITY スクリーンリーダーテスト報告(日本語)',
+          `日付: ${new Date().toISOString().slice(0, 10)}`,
+          `スクリーンリーダー: ${v('env-sr')} | ブラウザ: ${v('env-browser')} | OS: ${v('env-os')}`,
+          '',
+          '== テスト1: リアルタイム計器 ==',
+        ];
+        for (let i = 1; i <= 6; i++) lines.push(`1.${i}: ${v('q1-' + i)}`, '');
+        lines.push('== そのほか ==', v('q-open'), '');
+
+        out.value = lines.join('\n');
+        try {
+          await navigator.clipboard.writeText(out.value);
+          note.textContent = '報告を作成し、クリップボードにコピーしました。下のテキスト欄にもあります。';
+        } catch (e) {
+          note.textContent = '報告を作成しました。下のテキスト欄からコピーしてください。';
+        }
+        out.focus();
+      });
+
+      load();
+    </script>
+  </body>
+</html>
