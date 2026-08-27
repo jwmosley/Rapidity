@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Test 2 — sound and the mute switch</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 1rem; max-width: 34rem; line-height: 1.5; }
+      button { display: block; width: 100%; min-height: 56px; font-size: 1.1rem; margin: 0.6rem 0; }
+      #state { font-size: 1.05rem; border: 1px solid #999; padding: 0.6rem; margin: 0.6rem 0; }
+      .playing { background: #cfc; }
+      ol li { margin: 0.5rem 0; }
+    </style>
+  </head>
+  <body>
+    <h1>Test 2 — sound and the mute switch</h1>
+    <p><a href="index.html">Start</a> · <a href="report.html">Report form</a></p>
+
+    <p>The game speaks through sound as much as speech — engine pitch, alert tones.
+      The worry: iPhones can silence web audio with the mute switch or Action
+      button, which for a blind player would mean losing half the game without
+      knowing why. The two buttons below make the same steady tone through two
+      different plumbing routes; the whole test is finding out what your mute
+      control does to each.</p>
+
+    <div id="state">audio: not started</div>
+
+    <button id="a">Start tone — route A</button>
+    <button id="b">Start tone — route B</button>
+    <button id="stop">Stop</button>
+
+    <h2>Questions (answer on the <a href="report.html">report form</a>)</h2>
+    <ol>
+      <li><strong>2.1</strong> — Phone unmuted, VoiceOver running as usual: start
+        route A. Do you hear the tone alongside VoiceOver?</li>
+      <li><strong>2.2</strong> — While A plays, mute the phone (switch or Action
+        button). Does the tone keep playing or stop?</li>
+      <li><strong>2.3</strong> — Reload the page with the phone already muted, then
+        start route A. Any sound?</li>
+      <li><strong>2.4</strong> — Repeat 2.1 to 2.3 with route B. Any differences
+        from A?</li>
+      <li><strong>2.5</strong> — With a tone playing: lock the phone, then unlock.
+        Then switch to another app and back. What survives, and what does the
+        status line above say afterward?</li>
+      <li><strong>2.6</strong> — Does the tone fight VoiceOver at all — ducking,
+        garbled speech, volume battles?</li>
+    </ol>
+
+    <p><a href="report.html">Continue to the report form</a>.</p>
+
+    <audio id="sink" playsinline></audio>
+
+    <script>
+      const state = document.getElementById('state');
+      const sink = document.getElementById('sink');
+      let ctx = null;
+      let osc = null;
+
+      function show(mode) {
+        const s = ctx ? ctx.state : 'not started';
+        state.textContent = `audio: ${s}${mode ? ' — ' + mode : ''}`;
+        state.className = mode ? 'playing' : '';
+      }
+
+      function stop() {
+        if (osc) { osc.stop(); osc = null; }
+        sink.pause();
+        sink.srcObject = null;
+        show('');
+      }
+
+      function start(routeThroughElement) {
+        stop();
+        // Context creation and start must live inside the tap — iOS unlock rule.
+        if (!ctx) {
+          ctx = new (window.AudioContext || window.webkitAudioContext)();
+          ctx.addEventListener('statechange', () => show(osc ? 'tone running' : ''));
+        }
+        if (ctx.state === 'suspended') ctx.resume();
+
+        osc = ctx.createOscillator();
+        osc.frequency.value = 440;
+        const gain = ctx.createGain();
+        gain.gain.value = 0.15;
+        osc.connect(gain);
+
+        if (routeThroughElement) {
+          const dest = ctx.createMediaStreamDestination();
+          gain.connect(dest);
+          sink.srcObject = dest.stream;
+          sink.play();
+          show('route B tone running');
+        } else {
+          gain.connect(ctx.destination);
+          show('route A tone running');
+        }
+        osc.start();
+      }
+
+      document.getElementById('a').addEventListener('click', () => start(false));
+      document.getElementById('b').addEventListener('click', () => start(true));
+      document.getElementById('stop').addEventListener('click', stop);
+    </script>
+  </body>
+</html>

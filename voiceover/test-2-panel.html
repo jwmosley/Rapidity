@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Test 2 — a panel region</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 1.5rem; max-width: 44rem; line-height: 1.5; }
+      #panel { border: 2px solid #444; padding: 1rem; margin: 1rem 0; }
+      #panel:focus-within { border-color: #06c; }
+      [role='meter'] { padding: 0.4rem; margin: 0.4rem 0; width: max-content; }
+      #mode { font-weight: 700; border: 1px solid #999; padding: 0.4rem 0.8rem; width: max-content; }
+      #status { border: 1px dashed #999; padding: 0.5rem; min-height: 1.5rem; margin: 1rem 0; }
+      ol li { margin: 0.5rem 0; }
+    </style>
+  </head>
+  <body>
+    <h1>Test 2 — a panel region</h1>
+    <p id="doc-anchor" tabindex="-1"><a href="index.html">Start</a> ·
+      <a href="report.html">Report form</a></p>
+
+    <p>The game needs single-letter commands — press R, hear the radiator margin —
+      without taking over the page. The panel below uses
+      <code>role="application"</code> and claims those letters only while keyboard
+      focus is inside it; Escape leaves. This pattern was shaped around Windows
+      screen readers, so the open question is how it behaves under VoiceOver —
+      including whether the application role helps, does nothing, or gets in your
+      way.</p>
+
+    <h2>Ordinary content</h2>
+    <p>Normal reading territory. Here is a <a href="#doc-anchor">link to find</a>.</p>
+
+    <div id="mode">DOCUMENT MODE</div>
+
+    <h2>The panel</h2>
+    <div id="panel" role="application" aria-label="Panel. Single letter commands. Escape leaves.">
+      <div role="meter" tabindex="0" aria-label="Radiator margin" aria-valuemin="0"
+        aria-valuemax="100" aria-valuenow="72" aria-valuetext="72 percent">
+        Radiator margin: 72
+      </div>
+      <div role="meter" tabindex="0" aria-label="Speed" aria-valuemin="0"
+        aria-valuemax="100" aria-valuenow="95" aria-valuetext="0.9517 c">
+        Speed: 0.9517 c
+      </div>
+    </div>
+
+    <div aria-live="polite" id="status"></div>
+
+    <h2>Questions (answer on the <a href="report.html">report form</a>)</h2>
+    <ol>
+      <li><strong>2.1</strong> — Navigate the section above the panel however you
+        normally do. Anything unusual?</li>
+      <li><strong>2.2</strong> — Move into the panel. Does VoiceOver announce it or
+        its label? Does the application role change how VoiceOver behaves — a
+        different interaction feel, extra announcements, or silence?</li>
+      <li><strong>2.3</strong> — With keyboard focus on one of the two meters,
+        press R, then S. Do values speak? If you use single-key Quick Nav, do the
+        letters collide with it?</li>
+      <li><strong>2.4</strong> — Press Escape. Where do you land, and is it
+        announced?</li>
+      <li><strong>2.5</strong> — Work the panel your own way — including
+        interacting and stopping interaction with it. The page shows a PANEL MODE /
+        DOCUMENT MODE indicator near the top: does it ever disagree with where you
+        actually are?</li>
+      <li><strong>2.6</strong> — Verdict: workable for a long session, or fighting
+        VoiceOver? What would you change?</li>
+    </ol>
+
+    <p><a href="report.html">Continue to the report form</a>.</p>
+
+    <script>
+      const panel = document.getElementById('panel');
+      const mode = document.getElementById('mode');
+      const status = document.getElementById('status');
+
+      function setMode(inPanel) {
+        mode.textContent = inPanel ? 'PANEL MODE' : 'DOCUMENT MODE';
+        status.textContent = inPanel
+          ? 'Panel mode. Single letter commands. Escape leaves.'
+          : 'Document mode. Browse navigation active.';
+      }
+
+      panel.addEventListener('focusin', () => setMode(true));
+      panel.addEventListener('focusout', (e) => {
+        if (!panel.contains(e.relatedTarget)) setMode(false);
+      });
+
+      panel.addEventListener('keydown', (e) => {
+        if (e.key === 'r' || e.key === 'R') {
+          status.textContent = 'Radiator margin 72 percent';
+        } else if (e.key === 's' || e.key === 'S') {
+          status.textContent = 'Speed 0.9517 c';
+        } else if (e.key === 'Escape') {
+          document.getElementById('doc-anchor').focus();
+        }
+      });
+    </script>
+  </body>
+</html>

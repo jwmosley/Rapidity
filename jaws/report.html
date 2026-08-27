@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Report form — Rapidity screen reader testing</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 1.5rem; max-width: 44rem; line-height: 1.5; }
+      label { display: block; font-weight: 600; margin-top: 1.2rem; }
+      input[type='text'], textarea { display: block; width: 100%; font: inherit; padding: 0.4rem; margin-top: 0.3rem; box-sizing: border-box; }
+      textarea { min-height: 4.5rem; }
+      button { min-height: 44px; font-size: 1rem; padding: 0.5rem 1rem; margin-top: 1.5rem; }
+      #out { margin-top: 1rem; min-height: 12rem; font-family: ui-monospace, monospace; }
+      #save-note { border: 1px solid #999; padding: 0.5rem; margin-top: 1rem; }
+    </style>
+  </head>
+  <body>
+    <h1>Report form</h1>
+    <p><a href="index.html">Start</a> · <a href="test-1-gauge.html">Test 1</a> ·
+      <a href="test-2-panel.html">Test 2</a></p>
+
+    <p>Answers autosave in this browser as you type. "Build my report" turns them
+      into plain text to copy and send to Jeremy.</p>
+
+    <form id="report">
+      <h2>Your setup</h2>
+      <label for="env-jaws">JAWS version</label>
+      <input type="text" id="env-jaws" />
+      <label for="env-browser">Browser and version</label>
+      <input type="text" id="env-browser" />
+      <label for="env-windows">Windows version</label>
+      <input type="text" id="env-windows" />
+
+      <h2>Test 1 — the live gauge</h2>
+      <label for="q1-1">1.1 — What does JAWS say for the gauge, as close to word for word as you can?</label>
+      <textarea id="q1-1"></textarea>
+      <label for="q1-2">1.2 — Tabbing to the gauge while it drifts: current value each time, or stale?</label>
+      <textarea id="q1-2"></textarea>
+      <label for="q1-3">1.3 — Chatty: keep up, fall behind, or flood? Livable on a real panel?</label>
+      <textarea id="q1-3"></textarea>
+      <label for="q1-4">1.4 — Alerts only: crossings of 30 announced reliably, both directions?</label>
+      <textarea id="q1-4"></textarea>
+      <label for="q1-5">1.5 — Quiet: silent, as it should be?</label>
+      <textarea id="q1-5"></textarea>
+      <label for="q1-6">1.6 — Quiet instruments, query on demand, only genuine alerts speak: right bet for hours of play?</label>
+      <textarea id="q1-6"></textarea>
+
+      <h2>Test 2 — the panel region</h2>
+      <label for="q2-1">2.1 — Quick nav normal above the panel?</label>
+      <textarea id="q2-1"></textarea>
+      <label for="q2-2">2.2 — Tabbing into the panel: mode switch announced? Label read?</label>
+      <textarea id="q2-2"></textarea>
+      <label for="q2-3">2.3 — Did R and S reach the page, or did JAWS take them?</label>
+      <textarea id="q2-3"></textarea>
+      <label for="q2-4">2.4 — Escape: back in ordinary content with quick nav working?</label>
+      <textarea id="q2-4"></textarea>
+      <label for="q2-5">2.5 — Entering and leaving your own way: did the mode indicator ever get it wrong?</label>
+      <textarea id="q2-5"></textarea>
+      <label for="q2-6">2.6 — Verdict: workable for a long session, or fighting JAWS? What would you change?</label>
+      <textarea id="q2-6"></textarea>
+
+      <h2>Anything else</h2>
+      <label for="q-open">Anything we didn't ask — annoyances, surprises, ideas</label>
+      <textarea id="q-open"></textarea>
+
+      <button type="button" id="build">Build my report</button>
+    </form>
+
+    <div aria-live="polite" id="save-note"></div>
+
+    <label for="out">Your report as plain text</label>
+    <textarea id="out" readonly></textarea>
+
+    <script>
+      const KEY = 'rapidity-jaws-report';
+      const form = document.getElementById('report');
+      const note = document.getElementById('save-note');
+      const out = document.getElementById('out');
+      const fields = [...form.querySelectorAll('input[type="text"], textarea')];
+
+      function load() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+          for (const f of fields) if (saved[f.id]) f.value = saved[f.id];
+        } catch (e) { /* no saved answers is fine */ }
+      }
+
+      let saveTimer = null;
+      function save() {
+        clearTimeout(saveTimer);
+        saveTimer = setTimeout(() => {
+          try {
+            const data = {};
+            for (const f of fields) data[f.id] = f.value;
+            localStorage.setItem(KEY, JSON.stringify(data));
+          } catch (e) { /* private mode etc.; the copy button still works */ }
+        }, 500);
+      }
+      form.addEventListener('input', save);
+
+      document.getElementById('build').addEventListener('click', async () => {
+        const v = (id) => (document.getElementById(id).value.trim() || '(no answer)');
+        const lines = [
+          'RAPIDITY SCREEN READER TEST REPORT — JAWS',
+          `Date: ${new Date().toISOString().slice(0, 10)}`,
+          `JAWS: ${v('env-jaws')} | Browser: ${v('env-browser')} | Windows: ${v('env-windows')}`,
+          '',
+          '== Test 1: live gauge ==',
+        ];
+        for (let i = 1; i <= 6; i++) lines.push(`1.${i}: ${v('q1-' + i)}`, '');
+        lines.push('== Test 2: panel region ==');
+        for (let i = 1; i <= 6; i++) lines.push(`2.${i}: ${v('q2-' + i)}`, '');
+        lines.push('== Anything else ==', v('q-open'), '');
+
+        out.value = lines.join('\n');
+        try {
+          await navigator.clipboard.writeText(out.value);
+          note.textContent = 'Report built and copied to the clipboard. It is also in the text box below.';
+        } catch (e) {
+          note.textContent = 'Report built. It is in the text box below.';
+        }
+        out.focus();
+      });
+
+      load();
+    </script>
+  </body>
+</html>
