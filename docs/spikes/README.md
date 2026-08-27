@@ -21,4 +21,4 @@ and ends with an explicit verdict:
 | 3 | WebHID talking to an Arduino | — | pending |
 | 4 | iOS hardware silent switch vs Web Audio | — | pending |
 | 5 | Rapidity precision at γ = 1000 | [05-rapidity-precision.md](05-rapidity-precision.md) | **confirmed** |
-| 6 | Guidepup driving NVDA in CI | — | pending |
+| 6 | Guidepup driving NVDA in CI | [06-guidepup-nvda.md](06-guidepup-nvda.md) | **go** |
