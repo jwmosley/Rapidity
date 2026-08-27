@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rapidity.dev/schemas/command.schema.json",
+  "title": "Command",
+  "description": "One player action. Must survive a JSON round trip: no object references, no class instances, no undefined. Appended to the IndexedDB command log at issue time; the log is the save.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["verb", "params", "actor", "canonical", "issuedAt", "sequence"],
+  "properties": {
+    "verb": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z_]*$",
+      "examples": ["SET_ACCEL", "ADD_SEGMENT", "ACK_ALERT", "PAUSE", "SET_DESTINATION"]
+    },
+    "params": {
+      "type": "object",
+      "description": "Flat map. Numbers are SI.",
+      "additionalProperties": { "type": ["number", "string", "boolean"] }
+    },
+    "actor": {
+      "type": "string",
+      "default": "local",
+      "description": "Issuing station. 'local' in single-player. Present from day one so Phase 9 needs no retrofit."
+    },
+    "canonical": {
+      "type": "string",
+      "description": "Human-readable canonical form. Powers the command line, voice control, and the scriptable test harness.",
+      "examples": ["SET ACCEL 1.0 G", "ADD SEGMENT BURN 1.0 G 412 D"]
+    },
+    "issuedAt": {
+      "type": "number",
+      "description": "Proper (crew) time in seconds since scenario epoch."
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Monotonic. Defines log ordering and reconciliation."
+    }
+  }
+}

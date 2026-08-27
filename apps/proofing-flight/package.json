@@ -1,0 +1,20 @@
+{
+  "name": "@rapidity/proofing-flight",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "description": "Application shell. Composes every package into a running surface.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@rapidity/audio": "workspace:*",
+    "@rapidity/catalog": "workspace:*",
+    "@rapidity/panel": "workspace:*",
+    "@rapidity/physics": "workspace:*",
+    "@rapidity/protocol": "workspace:*",
+    "@rapidity/sim": "workspace:*",
+    "@rapidity/units": "workspace:*"
+  }
+}

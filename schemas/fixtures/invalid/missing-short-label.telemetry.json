@@ -1,0 +1,9 @@
+{
+  "id": "core:thermal.radiator_temp",
+  "label": "Radiator Temperature",
+  "value": 1500,
+  "unit": "K",
+  "formatted": "1500 K",
+  "spoken": "radiator temperature 1500 kelvin",
+  "quality": "nominal"
+}

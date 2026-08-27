@@ -1,0 +1,38 @@
+name: nightly-screen-readers
+
+# Tier 3. ACCESSIBILITY.md §2: Guidepup needs Windows runners for NVDA and macOS
+# runners for VoiceOver at roughly ten times the minute cost, and it is flaky enough
+# that PR-gating it means it gets switched off within a month. Nightly, and every job
+# is continue-on-error on purpose. Treat failures as signal, not as a stop.
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+env:
+  RAPIDITY_SKIP_BROWSER_INSTALL: '1'
+
+jobs:
+  screen-readers:
+    name: test:sr — ${{ matrix.reader }}
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - reader: NVDA + Firefox
+            os: windows-latest
+          - reader: VoiceOver + Safari
+            os: macos-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test:sr
+        continue-on-error: true

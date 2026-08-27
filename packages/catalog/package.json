@@ -1,0 +1,14 @@
+{
+  "name": "@rapidity/catalog",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "description": "Star catalog access over the committed CC BY-SA 4.0 artifact.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@rapidity/units": "workspace:*"
+  }
+}

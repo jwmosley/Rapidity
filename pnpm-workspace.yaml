@@ -1,0 +1,8 @@
+# tools/catalog-etl is deliberately absent: it is a Python/uv project that emits a
+# committed artifact at build time and never ships. ARCHITECTURE.md §2.
+packages:
+  - 'packages/*'
+  - 'apps/*'
+
+onlyBuiltDependencies:
+  - esbuild

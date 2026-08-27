@@ -1,0 +1,14 @@
+{
+  "id": "core:radiator_loop_mk1",
+  "schemaVersion": 1,
+  "name": "module.core.radiator_loop_mk1.name",
+  "spdx": "Apache-2.0",
+  "massDryKg": 42000,
+  "hardpointClass": ["large"],
+  "alerts": {
+    "core:thermal.radiator_overtemp": {
+      "tier": "caution",
+      "text": "alert.core.thermal.radiator_overtemp.text"
+    }
+  }
+}

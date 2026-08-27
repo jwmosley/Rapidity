@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rapidity.dev/schemas/module.schema.json",
+  "title": "Module Manifest",
+  "description": "A ship module. Phase 4. Build three by hand before treating this as settled. Behaviour composes from a fixed component vocabulary; there is no scripting.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "schemaVersion", "name", "spdx", "massDryKg", "hardpointClass"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+:[a-z0-9_]+$",
+      "description": "core: for first-party, author namespace for packs. Saves store id@schemaVersion.",
+      "examples": ["core:cryo_hab_mk2", "jeremy:ore_hopper"]
+    },
+    "schemaVersion": { "type": "integer", "minimum": 1 },
+    "name": { "type": "string", "description": "String catalog key, not literal text. All fiction lives in string catalogs." },
+    "spdx": {
+      "type": "string",
+      "description": "SPDX identifier. Required so the registry can surface pack licensing.",
+      "examples": ["Apache-2.0", "CC-BY-SA-4.0", "MIT"]
+    },
+    "massDryKg": { "type": "number", "exclusiveMinimum": 0 },
+    "volumeM3": { "type": "number", "exclusiveMinimum": 0 },
+    "hardpointClass": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "enum": ["small", "medium", "large", "spinal"] }
+    },
+    "draws": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "powerW": { "type": "number", "minimum": 0 },
+        "heatRejectW": { "type": "number", "minimum": 0 },
+        "computeUnits": { "type": "number", "minimum": 0 },
+        "consumablesKgPerS": { "type": "number", "minimum": 0 }
+      }
+    },
+    "provides": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "powerW": { "type": "number", "minimum": 0 },
+        "heatRejectW": { "type": "number", "minimum": 0 },
+        "propellantKg": { "type": "number", "minimum": 0 },
+        "thrustN": { "type": "number", "minimum": 0 },
+        "exhaustVelocityMPerS": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "requires": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "coolantLoop": { "type": "boolean" },
+        "maxAccelMPerS2": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "components": {
+      "type": "array",
+      "description": "Composition from the fixed vocabulary. No scripting, no eval.",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": { "type": "string", "enum": ["Source", "Sink", "Store", "Converter", "Radiator", "Tank", "Thruster"] }
+        }
+      }
+    },
+    "telemetry": {
+      "type": "object",
+      "description": "Instrument definitions. Every entry must satisfy telemetry.schema.json. Missing label, shortLabel or spoken fails schema lint and the module does not load.",
+      "additionalProperties": { "$ref": "telemetry.schema.json" }
+    },
+    "alerts": {
+      "type": "object",
+      "description": "Per ISA-18.2: every alarm has a defined operator response or it does not exist.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["tier", "text", "response"],
+        "properties": {
+          "tier": { "type": "string", "enum": ["advisory", "caution", "warning"] },
+          "text": { "type": "string", "description": "String catalog key." },
+          "response": {
+            "type": "array",
+            "minItems": 1,
+            "description": "ECAM-style procedure steps. String catalog keys.",
+            "items": { "type": "string" }
+          },
+          "suppressedBy": {
+            "type": "array",
+            "description": "Suppression by design: no low-pressure alarm on a deliberately shut pump.",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

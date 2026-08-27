@@ -1,0 +1,13 @@
+{
+  "id": "core:drive.thrust",
+  "label": "Drive Thrust",
+  "shortLabel": "THR",
+  "value": 9800000,
+  "unit": "N",
+  "formatted": "9.8 MN",
+  "spoken": "drive thrust 9.8 meganewtons",
+  "quality": "nominal",
+  "band": { "min": 0, "max": 12000000, "setpoint": 9800000 },
+  "group": "propulsion",
+  "sonify": { "channel": "amplitude", "scale": "linear" }
+}

@@ -1,0 +1,13 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/units" },
+    { "path": "packages/physics" },
+    { "path": "packages/protocol" },
+    { "path": "packages/sim" },
+    { "path": "packages/panel" },
+    { "path": "packages/audio" },
+    { "path": "packages/catalog" },
+    { "path": "apps/proofing-flight" }
+  ]
+}

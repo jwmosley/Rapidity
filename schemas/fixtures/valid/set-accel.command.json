@@ -1,0 +1,8 @@
+{
+  "verb": "SET_ACCEL",
+  "params": { "accelMPerS2": 9.80665 },
+  "actor": "local",
+  "canonical": "SET ACCEL 1.0 G",
+  "issuedAt": 0,
+  "sequence": 0
+}

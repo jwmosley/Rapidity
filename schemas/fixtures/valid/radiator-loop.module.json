@@ -1,0 +1,36 @@
+{
+  "id": "core:radiator_loop_mk1",
+  "schemaVersion": 1,
+  "name": "module.core.radiator_loop_mk1.name",
+  "spdx": "Apache-2.0",
+  "massDryKg": 42000,
+  "volumeM3": 180,
+  "hardpointClass": ["large"],
+  "provides": { "heatRejectW": 150000000000 },
+  "draws": { "powerW": 400000 },
+  "components": [{ "type": "Radiator" }],
+  "telemetry": {
+    "core:thermal.radiator_temp": {
+      "id": "core:thermal.radiator_temp",
+      "label": "Radiator Temperature",
+      "shortLabel": "RAD T",
+      "value": 1500,
+      "unit": "K",
+      "formatted": "1500 K",
+      "spoken": "radiator temperature 1500 kelvin",
+      "quality": "nominal",
+      "group": "thermal"
+    }
+  },
+  "alerts": {
+    "core:thermal.radiator_overtemp": {
+      "tier": "caution",
+      "text": "alert.core.thermal.radiator_overtemp.text",
+      "response": [
+        "alert.core.thermal.radiator_overtemp.step.1",
+        "alert.core.thermal.radiator_overtemp.step.2"
+      ],
+      "suppressedBy": ["core:thermal.loop_isolated"]
+    }
+  }
+}

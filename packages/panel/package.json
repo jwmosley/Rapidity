@@ -1,0 +1,14 @@
+{
+  "name": "@rapidity/panel",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "description": "SVG and DOM instruments. Binds to @rapidity/protocol only. Never to @rapidity/sim.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@rapidity/protocol": "workspace:*"
+  }
+}

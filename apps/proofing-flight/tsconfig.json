@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.test.ts"],
+  "references": [
+    { "path": "../../packages/audio" },
+    { "path": "../../packages/catalog" },
+    { "path": "../../packages/panel" },
+    { "path": "../../packages/physics" },
+    { "path": "../../packages/protocol" },
+    { "path": "../../packages/sim" },
+    { "path": "../../packages/units" }]
+}

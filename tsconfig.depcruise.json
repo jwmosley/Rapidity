@@ -1,0 +1,18 @@
+{
+  "//": "Resolution map for dependency-cruiser ONLY. It is deliberately not extended by any build tsconfig: the compiler must still fail on an undeclared cross-package import, while dependency-cruiser must be able to resolve that import far enough to name the rule it violates. Without this, a forbidden edge shows up as an unresolvable module rather than as ARCHITECTURE.md §2.1.",
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "baseUrl": ".",
+    "lib": ["ES2022", "DOM"],
+    "paths": {
+      "@rapidity/units": ["packages/units/src/index.ts"],
+      "@rapidity/physics": ["packages/physics/src/index.ts"],
+      "@rapidity/protocol": ["packages/protocol/src/index.ts"],
+      "@rapidity/sim": ["packages/sim/src/index.ts"],
+      "@rapidity/panel": ["packages/panel/src/index.ts"],
+      "@rapidity/audio": ["packages/audio/src/index.ts"],
+      "@rapidity/catalog": ["packages/catalog/src/index.ts"]
+    }
+  }
+}

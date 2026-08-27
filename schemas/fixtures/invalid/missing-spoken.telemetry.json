@@ -1,0 +1,9 @@
+{
+  "id": "core:drive.thrust",
+  "label": "Drive Thrust",
+  "shortLabel": "THR",
+  "value": 9800000,
+  "unit": "N",
+  "formatted": "9.8 MN",
+  "quality": "nominal"
+}

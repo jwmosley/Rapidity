@@ -1,0 +1,12 @@
+{
+  "name": "@rapidity/units",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "description": "Branded physical-quantity types and SI constants. Zero dependencies.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {}
+}

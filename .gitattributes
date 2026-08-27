@@ -1,0 +1,10 @@
+# LF in the repository and in the working tree. CI runs on Linux, .husky hooks are
+# shell scripts that fail on CRLF, and golden-file telemetry snapshots must not
+# differ by line ending across a contributor's platform.
+* text=auto eol=lf
+
+*.png  binary
+*.jpg  binary
+*.webp binary
+*.woff binary
+*.woff2 binary

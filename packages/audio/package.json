@@ -1,0 +1,14 @@
+{
+  "name": "@rapidity/audio",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "description": "Sonification and earcons. Binds to @rapidity/protocol only. Never to @rapidity/sim.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@rapidity/protocol": "workspace:*"
+  }
+}

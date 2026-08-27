@@ -1,0 +1,14 @@
+{
+  "name": "@rapidity/protocol",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "description": "Telemetry and Command wire types. The one interface everything crosses.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@rapidity/units": "workspace:*"
+  }
+}

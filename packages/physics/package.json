@@ -1,0 +1,14 @@
+{
+  "name": "@rapidity/physics",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "description": "Closed-form relativistic propagation. Pure functions, no state, no I/O.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@rapidity/units": "workspace:*"
+  }
+}

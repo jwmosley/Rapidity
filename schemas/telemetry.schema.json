@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rapidity.dev/schemas/telemetry.schema.json",
+  "title": "Telemetry",
+  "description": "One instrument reading. Every field marked required is required because an accessibility channel depends on it. Schema lint fails the build on omission.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "label", "shortLabel", "value", "unit", "formatted", "spoken", "quality"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+:[a-z0-9_.]+$",
+      "description": "Namespaced identifier, e.g. core:drive.thrust. Namespace is core: for first-party. Never rapidity:.",
+      "examples": ["core:drive.thrust", "core:thermal.radiator_temp"]
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "Full human-readable name. Screen reader and tooltip."
+    },
+    "shortLabel": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 8,
+      "description": "Abbreviated form for MFD real estate and braille displays.",
+      "examples": ["THR", "RAD T"]
+    },
+    "value": {
+      "type": "number",
+      "description": "SI value, always. Never pre-converted for display."
+    },
+    "unit": {
+      "type": "string",
+      "description": "SI unit of `value`.",
+      "examples": ["N", "K", "W", "kg", "m/s^2", "s", "m"]
+    },
+    "formatted": {
+      "type": "string",
+      "description": "Display string in player-facing units. Never contains gamma or rapidity."
+    },
+    "spoken": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Screen reader form. Expands symbols and units into words. Not the same as `formatted`.",
+      "examples": ["drive thrust 9.8 meganewtons", "earth clock three point two six times"]
+    },
+    "quality": {
+      "type": "string",
+      "enum": ["nominal", "advisory", "caution", "warning", "stale", "invalid"],
+      "description": "stale is set while causally disconnected (warp). Only caution and warning auto-announce."
+    },
+    "band": {
+      "type": "object",
+      "description": "Normal operating range, rendered as a bar so deviation reads before the number.",
+      "additionalProperties": false,
+      "required": ["min", "max"],
+      "properties": {
+        "min": { "type": "number" },
+        "max": { "type": "number" },
+        "setpoint": { "type": "number" }
+      }
+    },
+    "group": {
+      "type": "string",
+      "description": "Query group. Screen reader hotkeys poll a whole group.",
+      "examples": ["flight", "propulsion", "thermal"]
+    },
+    "sonify": {
+      "type": "object",
+      "description": "Optional audio mapping. Never the sole channel for anything actionable.",
+      "additionalProperties": false,
+      "required": ["channel"],
+      "properties": {
+        "channel": { "type": "string", "enum": ["pitch", "amplitude", "roughness", "pan"] },
+        "scale": { "type": "string", "enum": ["linear", "log"], "default": "linear" }
+      }
+    }
+  }
+}
