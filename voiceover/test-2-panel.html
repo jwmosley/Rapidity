@@ -12,12 +12,23 @@
       #mode { font-weight: 700; border: 1px solid #999; padding: 0.4rem 0.8rem; width: max-content; }
       #status { border: 1px dashed #999; padding: 0.5rem; min-height: 1.5rem; margin: 1rem 0; }
       ol li { margin: 0.5rem 0; }
+      .skip { position: absolute; left: -999px; }
+      .skip:focus { position: static; display: inline-block; padding: 0.3rem; }
+      nav[aria-label] { border-bottom: 1px solid #aaa; padding-bottom: 0.6rem; margin-bottom: 1.2rem; }
+      nav[aria-label] a { display: inline-block; margin-right: 0.9rem; padding: 0.4rem 0; }
+      nav[aria-label] [aria-current='page'] { font-weight: 700; }
     </style>
   </head>
   <body>
-    <h1>Test 2 — a panel region</h1>
-    <p id="doc-anchor" tabindex="-1"><a href="index.html">Start</a> ·
-      <a href="report.html">Report form</a></p>
+    <a class="skip" href="#main">Skip to content</a>
+    <nav aria-label="Site">
+      <a href="../">Site home</a>
+      <a href="index.html">VoiceOver testing</a>
+      <a href="test-1-gauge.html">Test 1</a>
+      <a href="test-2-panel.html" aria-current="page">Test 2</a>
+      <a href="report.html">Report</a>
+    </nav>
+    <h1 id="main" tabindex="-1">Test 2 — a panel region</h1>
 
     <p>The game needs single-letter commands — press R, hear the radiator margin —
       without taking over the page. The panel below uses
@@ -28,7 +39,7 @@
       way.</p>
 
     <h2>Ordinary content</h2>
-    <p>Normal reading territory. Here is a <a href="#doc-anchor">link to find</a>.</p>
+    <p>Normal reading territory. Here is a <a href="#main">link to find</a>.</p>
 
     <div id="mode">DOCUMENT MODE</div>
 
@@ -91,7 +102,7 @@
         } else if (e.key === 's' || e.key === 'S') {
           status.textContent = 'Speed 0.9517 c';
         } else if (e.key === 'Escape') {
-          document.getElementById('doc-anchor').focus();
+          document.getElementById('main').focus();
         }
       });
     </script>

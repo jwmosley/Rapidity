@@ -13,11 +13,22 @@
       label { display: block; margin: 0.5rem 0; }
       #status { border: 1px solid #999; padding: 0.5rem; min-height: 1.5rem; margin: 1rem 0; }
       ol li { margin: 0.5rem 0; }
+      .skip { position: absolute; left: -999px; }
+      .skip:focus { position: static; display: inline-block; padding: 0.3rem; }
+      nav[aria-label] { border-bottom: 1px solid #aaa; padding-bottom: 0.6rem; margin-bottom: 1.2rem; }
+      nav[aria-label] a { display: inline-block; margin-right: 0.9rem; padding: 0.4rem 0; }
+      nav[aria-label] [aria-current='page'] { font-weight: 700; }
     </style>
   </head>
   <body>
-    <h1>テスト1 — リアルタイム計器</h1>
-    <p><a href="index.html">はじめに</a> · <a href="report.html">報告フォーム</a></p>
+    <a class="skip" href="#main">本文へスキップ</a>
+    <nav aria-label="サイト">
+      <a href="../">サイトのホーム</a>
+      <a href="index.html">はじめに</a>
+      <a href="test-1-gauge.html" aria-current="page">テスト1</a>
+      <a href="report.html">報告フォーム</a>
+    </nav>
+    <h1 id="main" tabindex="-1">テスト1 — リアルタイム計器</h1>
 
     <p>「変動開始」を押すと、計器の値が1秒ごとに変わり続けます。ラジオボタンで、
       ページが自動で読み上げる量を選べます。</p>

@@ -10,11 +10,23 @@
       #state { font-size: 1.05rem; border: 1px solid #999; padding: 0.6rem; margin: 0.6rem 0; }
       .playing { background: #cfc; }
       ol li { margin: 0.5rem 0; }
+      .skip { position: absolute; left: -999px; }
+      .skip:focus { position: static; display: inline-block; padding: 0.3rem; }
+      nav[aria-label] { border-bottom: 1px solid #aaa; padding-bottom: 0.6rem; margin-bottom: 1.2rem; }
+      nav[aria-label] a { display: inline-block; margin-right: 0.9rem; padding: 0.4rem 0; }
+      nav[aria-label] [aria-current='page'] { font-weight: 700; }
     </style>
   </head>
   <body>
-    <h1>Test 2 — sound and the mute switch</h1>
-    <p><a href="index.html">Start</a> · <a href="report.html">Report form</a></p>
+    <a class="skip" href="#main">Skip to content</a>
+    <nav aria-label="Site">
+      <a href="../">Site home</a>
+      <a href="index.html">iPhone testing</a>
+      <a href="test-1-gauge.html">Test 1</a>
+      <a href="test-2-audio.html" aria-current="page">Test 2</a>
+      <a href="report.html">Report</a>
+    </nav>
+    <h1 id="main" tabindex="-1">Test 2 — sound and the mute switch</h1>
 
     <p>The game speaks through sound as much as speech — engine pitch, alert tones.
       The worry: iPhones can silence web audio with the mute switch or Action

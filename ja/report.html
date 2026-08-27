@@ -12,11 +12,22 @@
       button { min-height: 48px; font-size: 1rem; padding: 0.6rem 1rem; margin-top: 1.5rem; }
       #out { margin-top: 1rem; min-height: 12rem; font-family: ui-monospace, monospace; }
       #save-note { border: 1px solid #999; padding: 0.5rem; margin-top: 1rem; }
+      .skip { position: absolute; left: -999px; }
+      .skip:focus { position: static; display: inline-block; padding: 0.3rem; }
+      nav[aria-label] { border-bottom: 1px solid #aaa; padding-bottom: 0.6rem; margin-bottom: 1.2rem; }
+      nav[aria-label] a { display: inline-block; margin-right: 0.9rem; padding: 0.4rem 0; }
+      nav[aria-label] [aria-current='page'] { font-weight: 700; }
     </style>
   </head>
   <body>
-    <h1>報告フォーム</h1>
-    <p><a href="index.html">はじめに</a> · <a href="test-1-gauge.html">テスト1</a></p>
+    <a class="skip" href="#main">本文へスキップ</a>
+    <nav aria-label="サイト">
+      <a href="../">サイトのホーム</a>
+      <a href="index.html">はじめに</a>
+      <a href="test-1-gauge.html">テスト1</a>
+      <a href="report.html" aria-current="page">報告フォーム</a>
+    </nav>
+    <h1 id="main" tabindex="-1">報告フォーム</h1>
 
     <p>入力はこのブラウザに自動保存されます。「報告を作成」で全体がテキストに
       まとまるので、コピーして Jeremy に送ってください。</p>

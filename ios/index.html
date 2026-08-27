@@ -7,10 +7,23 @@
     <style>
       body { font-family: system-ui, sans-serif; margin: 1rem; max-width: 34rem; line-height: 1.5; }
       li { margin: 0.5rem 0; }
+      .skip { position: absolute; left: -999px; }
+      .skip:focus { position: static; display: inline-block; padding: 0.3rem; }
+      nav[aria-label] { border-bottom: 1px solid #aaa; padding-bottom: 0.6rem; margin-bottom: 1.2rem; }
+      nav[aria-label] a { display: inline-block; margin-right: 0.9rem; padding: 0.4rem 0; }
+      nav[aria-label] [aria-current='page'] { font-weight: 700; }
     </style>
   </head>
   <body>
-    <h1>Rapidity iPhone testing</h1>
+    <a class="skip" href="#main">Skip to content</a>
+    <nav aria-label="Site">
+      <a href="../">Site home</a>
+      <a href="index.html" aria-current="page">iPhone testing</a>
+      <a href="test-1-gauge.html">Test 1</a>
+      <a href="test-2-audio.html">Test 2</a>
+      <a href="report.html">Report</a>
+    </nav>
+    <h1 id="main" tabindex="-1">Rapidity iPhone testing</h1>
 
     <p>Rapidity is a spaceship operations simulator built accessibility-first: the
       whole game is instruments, and it must be fully playable with a screen reader

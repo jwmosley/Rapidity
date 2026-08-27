@@ -7,10 +7,22 @@
     <style>
       body { font-family: system-ui, sans-serif; margin: 1.5rem; max-width: 40rem; line-height: 1.7; }
       li { margin: 0.5rem 0; }
+      .skip { position: absolute; left: -999px; }
+      .skip:focus { position: static; display: inline-block; padding: 0.3rem; }
+      nav[aria-label] { border-bottom: 1px solid #aaa; padding-bottom: 0.6rem; margin-bottom: 1.2rem; }
+      nav[aria-label] a { display: inline-block; margin-right: 0.9rem; padding: 0.4rem 0; }
+      nav[aria-label] [aria-current='page'] { font-weight: 700; }
     </style>
   </head>
   <body>
-    <h1>Rapidity スクリーンリーダーテスト</h1>
+    <a class="skip" href="#main">本文へスキップ</a>
+    <nav aria-label="サイト">
+      <a href="../">サイトのホーム</a>
+      <a href="index.html" aria-current="page">はじめに</a>
+      <a href="test-1-gauge.html">テスト1</a>
+      <a href="report.html">報告フォーム</a>
+    </nav>
+    <h1 id="main" tabindex="-1">Rapidity スクリーンリーダーテスト</h1>
 
     <p>Rapidity は、計器だけで宇宙船を運用するシミュレーターです。アクセシビリティを
       第一に開発しており、スクリーンリーダーだけで完全に遊べることを目標にしています。
