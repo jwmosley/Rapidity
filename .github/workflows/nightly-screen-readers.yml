@@ -41,6 +41,9 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install ${{ inputs.browser }}
       - uses: guidepup/setup-action@0.21.0
+      # The action does the once-per-machine OS setup; the project-local screen
+      # reader assets matching our @guidepup/guidepup version are a separate step.
+      - run: npx @guidepup/setup install
       - run: pnpm test:sr
         env:
           SR_BROWSER: ${{ inputs.browser }}
