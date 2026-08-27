@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "deque-systems.vscode-axe-linter",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "vitest.explorer",
+    "usernamehw.errorlens",
+    "jock.svg",
+    "ms-python.python",
+    "charliermarsh.ruff",
+    "github.vscode-github-actions",
+    "github.vscode-pull-request-github",
+    "eamodio.gitlens"
+  ]
+}

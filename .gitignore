@@ -25,6 +25,7 @@ Thumbs.db
 .idea/
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
 
 # local env
 .env

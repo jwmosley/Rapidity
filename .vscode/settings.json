@@ -1,0 +1,10 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["**/modules/**/*.json"],
+      "url": "./schemas/module.schema.json"
+    }
+  ],
+  "files.associations": { "*.jsonl": "jsonl" },
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
