@@ -17,6 +17,9 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^19.6.0
         version: 19.8.1
+      '@guidepup/guidepup':
+        specifier: ^0.33.2
+        version: 0.33.2
       '@types/node':
         specifier: ^22.10.5
         version: 22.20.1
@@ -329,6 +332,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@guidepup/guidepup@0.33.2':
+    resolution: {integrity: sha512-aOoZ7Su9sNBm6hjdrgHC1TTAofU0Dz1+uo9uzWuTD7DMIOWGrbbNaFOHoFWHQr8KHw6dV3UwuHIjhKjQlYpxFQ==}
+
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
 
@@ -514,6 +520,10 @@ packages:
 
   '@vitest/utils@2.1.9':
     resolution: {integrity: sha512-v0psaMSkNJ3A2NMrUEHFRzJtDPFn+/VWZ5WxImB21T9fjucJRmS7xCS3ppEnARb9y11OAzaD+P2Ps+b+BGX5iQ==}
+
+  '@xmldom/xmldom@0.9.12':
+    resolution: {integrity: sha512-5AXjrcMClTryPe9LgZrygpB1lj7s0S9E0+W+AHaVKAVyHanafK86iPSvG5xHVSp/jC+VH1UXu0TAEmY279xH7A==}
+    engines: {node: '>=14.6'}
 
   JSONStream@1.3.5:
     resolution: {integrity: sha512-E+iruNOY8VV9s4JEbe1aNEm6MiszPRr/UfcHMz0TQh1BXSxHK+ASV1R6W4HpjBhSeS+54PIsAMCBmwD06LLsqQ==}
@@ -943,6 +953,10 @@ packages:
     engines: {node: '>=20'}
     hasBin: true
 
+  plist@4.0.0:
+    resolution: {integrity: sha512-4dOqNo0Y2NpfSf9q4+zr4bh7pzNWeckIam34Z0KYJhg8qtNNfh59VbD+Yna5SjwcxawVvLKx5w5FtuCijpEF4Q==}
+    engines: {node: '>=18'}
+
   postcss@8.5.26:
     resolution: {integrity: sha512-u82N74LFzG8ca+dD8puPnplTXoGH4fTPpVGuIbt36G3qvNlkvfD0lEAZSxaly3KX8TS/L1A1gsCEmvKmBcVbkQ==}
     engines: {node: ^10 || ^12 || >=14}
@@ -1167,6 +1181,10 @@ packages:
     resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}
     engines: {node: '>=10'}
 
+  xmlbuilder@15.1.1:
+    resolution: {integrity: sha512-yMqGBqtXyeN1e3TGYvgNgDVZ3j84W4cwkOXQswghol6APgZWaff9lnbvN7MHYJOiXsvGPXtjTYJEiC9J2wv9Eg==}
+    engines: {node: '>=8.0'}
+
   y18n@5.0.8:
     resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==}
     engines: {node: '>=10'}
@@ -1377,6 +1395,13 @@ snapshots:
   '@esbuild/win32-x64@0.21.5':
     optional: true
 
+  '@guidepup/guidepup@0.33.2':
+    dependencies:
+      debug: 4.4.3
+      plist: 4.0.0
+    transitivePeerDependencies:
+      - supports-color
+
   '@jridgewell/sourcemap-codec@1.5.5': {}
 
   '@napi-rs/lzma-linux-x64-gnu@1.5.1':
@@ -1506,6 +1531,8 @@ snapshots:
       '@vitest/pretty-format': 2.1.9
       loupe: 3.2.1
       tinyrainbow: 1.2.0
+
+  '@xmldom/xmldom@0.9.12': {}
 
   JSONStream@1.3.5:
     dependencies:
@@ -1887,6 +1914,11 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.2
 
+  plist@4.0.0:
+    dependencies:
+      '@xmldom/xmldom': 0.9.12
+      xmlbuilder: 15.1.1
+
   postcss@8.5.26:
     dependencies:
       nanoid: 3.3.18
@@ -2102,6 +2134,8 @@ snapshots:
       ansi-styles: 4.3.0
       string-width: 4.2.3
       strip-ansi: 6.0.1
+
+  xmlbuilder@15.1.1: {}
 
   y18n@5.0.8: {}
 

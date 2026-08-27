@@ -24,6 +24,7 @@
     "@axe-core/playwright": "^4.10.1",
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
+    "@guidepup/guidepup": "^0.33.2",
     "@types/node": "^22.10.5",
     "ajv": "^8.17.1",
     "dependency-cruiser": "^16.9.0",

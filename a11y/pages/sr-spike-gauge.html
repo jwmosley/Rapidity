@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rapidity — screen reader spike gauge</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 1.5rem; max-width: 40rem; }
+      svg { display: block; }
+    </style>
+  </head>
+  <body>
+    <!--
+      Spike 6 target (spike/06-guidepup-nvda branch only). Three things a
+      screen reader must surface, each asserted separately by scripts/test-sr.mjs:
+      plain text (baseline), an SVG gauge with meter semantics (spike 1 preview),
+      and a polite live region updated by the button (the game's one live region).
+    -->
+    <h1>Screen reader spike gauge</h1>
+
+    <p>Coolant loop two is nominal.</p>
+
+    <div
+      role="meter"
+      aria-label="Radiator margin"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="72"
+      aria-valuetext="72 percent"
+      id="gauge"
+    >
+      <svg width="200" height="120" viewBox="0 0 200 120" aria-hidden="true">
+        <path d="M 20 110 A 80 80 0 0 1 180 110" fill="none" stroke="#666" stroke-width="10" />
+        <line id="needle" x1="100" y1="110" x2="100" y2="40" stroke="#000" stroke-width="4"
+          transform="rotate(40 100 110)" />
+      </svg>
+    </div>
+
+    <button id="vent">Open auxiliary vent</button>
+
+    <div aria-live="polite" id="status"></div>
+
+    <script>
+      document.getElementById('vent').addEventListener('click', () => {
+        const gauge = document.getElementById('gauge');
+        gauge.setAttribute('aria-valuenow', '68');
+        gauge.setAttribute('aria-valuetext', '68 percent');
+        document
+          .getElementById('needle')
+          .setAttribute('transform', 'rotate(32 100 110)');
+        document.getElementById('status').textContent = 'Radiator margin 68 percent';
+      });
+    </script>
+  </body>
+</html>

@@ -1,31 +1,36 @@
 name: nightly-screen-readers
 
-# Tier 3. ACCESSIBILITY.md §2: Guidepup needs Windows runners for NVDA and macOS
-# runners for VoiceOver at roughly ten times the minute cost, and it is flaky enough
-# that PR-gating it means it gets switched off within a month. Nightly, and every job
-# is continue-on-error on purpose. Treat failures as signal, not as a stop.
+# spike/06-guidepup-nvda: this branch repurposes the nightly workflow as the
+# spike 6 harness (ROADMAP.md Phase 0) — does Guidepup drive NVDA on a hosted
+# Windows runner, and how flaky is it across repeated dispatches? The schedule
+# trigger is dropped here; schedules only fire from main anyway, and main's
+# copy of this file is untouched.
+#
+# Dispatch:
+#   gh workflow run nightly-screen-readers.yml --ref spike/06-guidepup-nvda \
+#     -f browser=firefox -f runs=3
 
 on:
-  schedule:
-    - cron: '0 3 * * *'
   workflow_dispatch:
+    inputs:
+      browser:
+        description: Browser to drive (firefox is the primary reader pairing)
+        type: choice
+        options: [firefox, chromium]
+        default: firefox
+      runs:
+        description: Iterations inside this job (flakiness signal)
+        default: '3'
 
 env:
   RAPIDITY_SKIP_BROWSER_INSTALL: '1'
 
 jobs:
-  screen-readers:
-    name: test:sr — ${{ matrix.reader }}
-    continue-on-error: true
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - reader: NVDA + Firefox
-            os: windows-latest
-          - reader: VoiceOver + Safari
-            os: macos-latest
-    runs-on: ${{ matrix.os }}
+  nvda:
+    name: "spike 6 — guidepup + NVDA (${{ inputs.browser }} x ${{ inputs.runs }})"
+    runs-on: windows-latest
+    # Cap billed minutes if NVDA or the browser hangs; windows-latest bills 2x.
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -34,5 +39,9 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install ${{ inputs.browser }}
+      - uses: guidepup/setup-action@0.21.0
       - run: pnpm test:sr
-        continue-on-error: true
+        env:
+          SR_BROWSER: ${{ inputs.browser }}
+          SR_RUNS: ${{ inputs.runs }}
