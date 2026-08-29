@@ -1,0 +1,12 @@
+{
+  "id": "core:thermal.radiator_margin",
+  "label": "Radiator Margin",
+  "shortLabel": "RAD MRG",
+  "value": 72000000000,
+  "unit": "W",
+  "formatted": "72 GW",
+  "spoken": "radiator margin 72 gigawatts",
+  "quality": "nominal",
+  "band": { "min": 30000000000, "max": 140000000000, "setpoint": 90000000000 },
+  "group": "thermal"
+}
