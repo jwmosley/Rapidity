@@ -7,8 +7,8 @@
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
 
-import { coshDifference, sinhDifference } from './hyperbolic';
-import { HYPERBOLIC_GOLDEN } from './hyperbolic.golden';
+import { coshDifference, sinhDifference } from './hyperbolic.ts';
+import { HYPERBOLIC_GOLDEN } from './hyperbolic.golden.ts';
 
 const relError = (actual: number, expected: number): number =>
   expected === 0 ? Math.abs(actual) : Math.abs(actual - expected) / Math.abs(expected);

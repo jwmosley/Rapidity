@@ -6,8 +6,8 @@ export {
   rapidityOfGamma,
   rapidityOfVelocity,
   velocityOf,
-} from './conversions';
-export { coshDifference, sinhDifference } from './hyperbolic';
+} from './conversions.ts';
+export { coshDifference, sinhDifference } from './hyperbolic.ts';
 export {
   INITIAL_STATE,
   evaluatePlan,
@@ -19,7 +19,7 @@ export {
   type CoastSegment,
   type Segment,
   type State,
-} from './segments';
-export { flipAndBurn, flipAndBurnSegments, type FlipAndBurn } from './flip';
-export { finalMass, massRatio, rapidityBudget } from './rocket';
-export { jetPower, radiatorArea, radiatorFlux } from './thermal';
+} from './segments.ts';
+export { flipAndBurn, flipAndBurnSegments, type FlipAndBurn } from './flip.ts';
+export { finalMass, massRatio, rapidityBudget } from './rocket.ts';
+export { jetPower, radiatorArea, radiatorFlux } from './thermal.ts';

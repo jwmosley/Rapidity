@@ -17,11 +17,11 @@ import {
   watts,
 } from '@rapidity/units';
 
-import { betaOf, gammaOf } from './conversions';
-import { flipAndBurn, flipAndBurnSegments } from './flip';
-import { massRatio } from './rocket';
-import { INITIAL_STATE, evaluatePlan, planDuration, propagatePlan } from './segments';
-import { jetPower, radiatorArea } from './thermal';
+import { betaOf, gammaOf } from './conversions.ts';
+import { flipAndBurn, flipAndBurnSegments } from './flip.ts';
+import { massRatio } from './rocket.ts';
+import { INITIAL_STATE, evaluatePlan, planDuration, propagatePlan } from './segments.ts';
+import { jetPower, radiatorArea } from './thermal.ts';
 
 const JULIAN_YEAR_S = 31_557_600;
 const years = (seconds: number): number => seconds / JULIAN_YEAR_S;

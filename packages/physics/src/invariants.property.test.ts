@@ -16,9 +16,9 @@ import {
   rapidity,
 } from '@rapidity/units';
 
-import { betaOf, composeRapidities, gammaOf } from './conversions';
-import { flipAndBurnSegments } from './flip';
-import { finalMass, rapidityBudget } from './rocket';
+import { betaOf, composeRapidities, gammaOf } from './conversions.ts';
+import { flipAndBurnSegments } from './flip.ts';
+import { finalMass, rapidityBudget } from './rocket.ts';
 import {
   INITIAL_STATE,
   evaluateWithin,
@@ -26,7 +26,7 @@ import {
   propagateSegment,
   type Segment,
   type State,
-} from './segments';
+} from './segments.ts';
 
 const eta = (min: number, max: number) => fc.double({ min, max, noNaN: true });
 

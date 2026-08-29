@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { coordTime, properTime } from '@rapidity/units';
 
-import type { Command, Telemetry, TelemetryFrame } from './index';
+import type { Command, Telemetry, TelemetryFrame } from './index.ts';
 
 // The protocol rule these types exist to uphold: everything survives a JSON
 // round trip, byte for byte in structure.

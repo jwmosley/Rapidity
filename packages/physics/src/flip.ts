@@ -15,7 +15,7 @@ import {
   rapidity,
 } from '@rapidity/units';
 
-import type { BurnSegment } from './segments';
+import type { BurnSegment } from './segments.ts';
 
 export interface FlipAndBurn {
   readonly etaPeak: Rapidity;
