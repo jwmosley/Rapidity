@@ -9,8 +9,9 @@ consistent than any native toolkit, and ARIA gives control over instrument
 announcement that nothing else matches. Accessibility is the top constraint, so the
 platform best at it wins. Web Audio HRTF and WebHID come along free.
 
-Python is used for **build-time catalog ETL only** (`tools/catalog-etl`). It emits a
-committed artifact and never ships to the player.
+Python is used for **build-time tooling only** (`tools/`): the catalog ETL and the
+physics reference-value generator. Build tools emit committed artifacts and never
+ship to the player.
 
 A backend appears only at Phase 10 for the mod registry, and the game must remain
 fully playable without it.
