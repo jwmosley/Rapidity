@@ -6,5 +6,12 @@
     }
   ],
   "files.associations": { "*.jsonl": "jsonl" },
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "cSpell.words": [
+    "colour",
+    "ECAM",
+    "Guidepup",
+    "sonification",
+    "WCAG"
+  ]
 }
