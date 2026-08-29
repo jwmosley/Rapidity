@@ -11,6 +11,8 @@ coverage/
 test-results/
 playwright-report/
 .vitest/
+# generated fresh by scripts/build-a11y-pages.mjs on every lint:a11y run
+/a11y/pages/gauge.html
 
 # python — tools/catalog-etl is outside the workspace
 .venv/
