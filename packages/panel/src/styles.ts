@@ -67,3 +67,30 @@ export const GAUGE_CSS = `
   .gauge { --gauge-track: #999; --gauge-ink: #000; border-color: #000; }
 }
 `;
+
+export const PANEL_CSS = `
+.panel { max-width: 100%; }
+.panel-title { font-size: 1.1rem; margin: 0 0 0.4rem; }
+.panel-status {
+  border: 1px solid #8f8f8f;
+  padding: 0.4rem 0.6rem;
+  margin: 0 0 0.4rem;
+  min-height: 1.4rem;
+  font-variant-numeric: tabular-nums;
+}
+.panel-alert {
+  padding: 0.4rem 0.6rem;
+  margin: 0 0 0.4rem;
+  min-height: 1.4rem;
+  font-weight: 700;
+}
+.panel-alert:not(:empty) { border: 3px dashed #7a5b00; color: #7a5b00; }
+.panel-region {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  border: 2px solid #444;
+  padding: 0.5rem;
+}
+.panel-region:focus-within { border-color: #06c; }
+`;

@@ -13,6 +13,7 @@ playwright-report/
 .vitest/
 # generated fresh by scripts/build-a11y-pages.mjs on every lint:a11y run
 /a11y/pages/gauge.html
+/a11y/pages/panel.html
 
 # python — tools/catalog-etl is outside the workspace
 .venv/
