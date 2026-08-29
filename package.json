@@ -18,7 +18,8 @@
     "test:sr": "node scripts/test-sr.mjs",
     "lint:schema": "node scripts/lint-schema.mjs",
     "lint:a11y": "node scripts/build-a11y-pages.mjs && node scripts/lint-a11y.mjs",
-    "lint:deps": "depcruise packages apps --config .dependency-cruiser.cjs"
+    "lint:deps": "depcruise packages apps --config .dependency-cruiser.cjs",
+    "dev": "node scripts/dev.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.1",

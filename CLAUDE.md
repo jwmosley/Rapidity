@@ -46,6 +46,7 @@ pnpm lint:schema       # Tier 1 accessibility gate — blocking
 pnpm lint:a11y         # axe-core + 320px reflow — blocking
 pnpm lint:deps         # dependency-cruiser boundary check — blocking
 pnpm test:sr           # guidepup — nightly, non-blocking
+pnpm dev               # proofing shell at localhost:4173 — tsc --watch + static server
 pnpm build
 ```
 

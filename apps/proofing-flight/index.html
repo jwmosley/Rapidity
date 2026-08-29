@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rapidity — Proofing Flight</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 1rem; max-width: 40rem; }
+    </style>
+    <!-- Native ES modules over tsc output; no bundler. The map resolves the
+         workspace names to each package's built dist. -->
+    <script type="importmap">
+      {
+        "imports": {
+          "@rapidity/panel": "/packages/panel/dist/index.js",
+          "@rapidity/physics": "/packages/physics/dist/index.js",
+          "@rapidity/protocol": "/packages/protocol/dist/index.js",
+          "@rapidity/units": "/packages/units/dist/index.js"
+        }
+      }
+    </script>
+    <script type="module" src="./dist/main.js"></script>
+  </head>
+  <body></body>
+</html>

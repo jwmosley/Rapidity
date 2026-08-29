@@ -63,8 +63,8 @@ pnpm test
 | `pnpm test:sr` | Tier 3 — guidepup screen-reader automation | Nightly, non-blocking |
 | `pnpm build` | `tsc -b` | — |
 
-`pnpm dev` is not wired yet — there is nothing to serve until the app shell lands in
-Phase 2.
+`pnpm dev` serves the proofing shell at `http://localhost:4173` — `tsc --watch` plus
+a static server over native ES modules. No bundler.
 
 ## Licensing
 
